@@ -1,15 +1,21 @@
 {
-  "name": "ui_components",
+  "name": "eloquent_ui",
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "rm -rf dist/ && prettier --write src/ && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc -- module CommonJS --outDir dist/cjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -28,8 +34,8 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
-  "main": "index.js",
+  "description": "A react component library used to add customizable and resuable components to your react and react based applications.",
+  "main": "dist/cjs/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eloquentcoder/ui_components.git"
@@ -39,7 +45,7 @@
     "components"
   ],
   "author": "\"Patrick Obafemi\"",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/eloquentcoder/ui_components/issues"
   },
