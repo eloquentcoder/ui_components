@@ -7,19 +7,21 @@ export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAtt
 	textColor?: string;
 	borderColor?: string;
 	fullWidth?: boolean;
+	radius?: number;
 }
 
 export interface CurvedButtonProps extends ButtonProps {
 	radius?: number;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, className, color, textColor, style, borderColor, fullWidth = false, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ children, className, color, textColor, style, borderColor, radius, fullWidth = false, ...props }) => {
 	const _style: React.CSSProperties = style || {};
-	const classes = twMerge('p-4', className);
+	const classes = twMerge('px-2 py-1', className);
 
 	if (color) _style.backgroundColor = color;
 	if (textColor) _style.color = textColor;
 	if (borderColor) _style.borderColor = borderColor;
+	if (radius) _style.borderRadius = `${radius}px`;
 	_style.borderWidth = '1px';
 
 	if (fullWidth) _style.width = '100%';
@@ -41,9 +43,9 @@ export const OutlineButton: React.FC<ButtonProps> = ({ children, className, colo
 };
 
 export const CurvedButton: React.FC<CurvedButtonProps> = ({ children, className, radius, color, textColor, fullWidth, ...props }) => {
-	const classes = twMerge(`rounded-[${radius}]`, className);
+	const classes = twMerge('', className);
 	return (
-		<Button className={classes} color={color} textColor={textColor} {...props} fullWidth={fullWidth}>
+		<Button className={classes} color={color} textColor={textColor} radius={radius} {...props} fullWidth={fullWidth}>
 			{children}
 		</Button>
 	);
